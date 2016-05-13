@@ -28,6 +28,8 @@
                 </tr>
             </table>
             
+            <h3>Track Bus</h3>
+            
         </center>
     </div>
 </div>
@@ -37,6 +39,8 @@
         <center>
             
             <div id="papar_bas1"></div>
+            
+            <div id="papar_peta1"></div>
             
         </center>
     </div>
@@ -48,6 +52,12 @@
             
         }).done(function (data) {
             $("#papar_bas1").html(data);
+        });
+        
+        $.post(URL_SERVER + "student_ajax_papar_peta.php", {
+            
+        }).done(function (data) {
+            $("#papar_peta1").html(data);
         });
     });
 </script>
