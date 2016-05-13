@@ -31,23 +31,3 @@
         </center>
     </div>
 </div>
-
-<div class="row" style="margin-top: 5%; margin-left: 1%; margin-right: 1%;">
-    <div class="col-md-10 col-md-offset-1">
-        <center>
-            
-            <div id="papar_bas1"></div>
-            
-        </center>
-    </div>
-</div>
-
-<script>
-    $(document).ready(function () {
-        $.post(URL_SERVER + "student_papar_driver.php", {
-            
-        }).done(function (data) {
-            $("#papar_bas1").html(data);
-        });
-    });
-</script>
