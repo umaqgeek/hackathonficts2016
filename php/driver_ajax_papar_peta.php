@@ -1,9 +1,50 @@
+<?php
+require("dbconn.php");
+
+$sql = "SELECT * 
+    FROM driver_location dl, users1 u 
+    WHERE dl.u_id = u.u_id 
+    AND u.ut_id = 1 
+    AND u.u_status = 2 ";
+$r = mysql_query($sql) or die("Error: " . mysql_error());
+$t = mysql_num_rows($r);
+$d = mysql_fetch_array($r);
+
+$arr1 = array();
+$loc = "";
+$num = $t;
+if ($t > 0) {
+    $i = 0;
+    do {
+        $arr1[$i]['name'] = $d['u_fullname'] . "<br />" . $d['u_user_no'];
+        $arr1[$i]['lat_lon'] = $d['dl_lat_lon'];
+        $arr1[$i]['u_id'] = $d['u_id'];
+        $i++;
+    } while ($d = mysql_fetch_array($r));
+    for ($j=0; $j<$i-1; $j++) {
+        $name = $arr1[$j]['name'];
+        $lat_lon = $arr1[$j]['lat_lon'];
+        $u_id = $arr1[$j]['u_id'];
+        $loc .= "['" . $name . "', " . $lat_lon . ", " . $u_id . "],";
+    }
+    if ($i > 0) {
+        $name = $arr1[$i-1]['name'];
+        $lat_lon = $arr1[$i-1]['lat_lon'];
+        $u_id = $arr1[$i-1]['u_id'];
+        $loc .= "['" . $name . "', " . $lat_lon . ", " . $u_id . "]";
+    }
+}
+
+?>
+
 <div id="map" style="width: 100%; height: 100%;"></div>
 
-<script type="text/javascript">
+<script>
     
     var xmap = document.getElementById("map");
+    
     getLocation();
+    
     function getLocation() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(showPosition, showError);
@@ -32,8 +73,8 @@
     }
     
     function setOtherLocation(posX, posY) {
-        var numLoc = 2;
-        var locations = [["A", 2.289340, 102.304307, 1], ["B", 2.279340, 102.304307, 2]];
+        var numLoc = <?=$num; ?>;
+        var locations = [<?=$loc; ?>];
         var map = new google.maps.Map(document.getElementById("map"), {
             zoom: 13,
             center: new google.maps.LatLng(posX, posY),

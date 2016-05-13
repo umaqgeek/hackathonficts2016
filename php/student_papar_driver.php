@@ -66,10 +66,8 @@ $d = mysql_fetch_array($r);
             
             
             $.post(URL_SERVER + "student_ajax_papar_peta.php", {
-
             }).done(function (data) {
                 $("#papar_peta1").html(data);
-//                $("#papar_peta1").html("haha");
             });
         });
     });

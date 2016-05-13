@@ -12,6 +12,12 @@ if ($t > 0) {
     
     $d = mysql_fetch_array($r);
     $ut_id = $d['ut_id'];
+    $u_id = $d['u_id'];
+    
+    if ($ut_id == 1 || $ut_id == 2) {
+        $sql = "UPDATE users1 SET u_status = '2' WHERE u_id = '" . $u_id . "' ";
+        mysql_query($sql) or die("1|Cannot login!");
+    }
     
     if ($ut_id == 1) {
         die("-1|student_mainpage.html");
