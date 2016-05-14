@@ -48,6 +48,7 @@ if ($t > 0) {
     function getLocation() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(showPosition, showError);
+            $("#notis1").html(".. Finding your location, please wait ..").addClass("alert-info p_hack");
         } else {
             xmap.innerHTML = "Geolocation is not supported by this browser.";
         }
@@ -80,6 +81,9 @@ if ($t > 0) {
             center: new google.maps.LatLng(posX, posY),
             mapTypeId: google.maps.MapTypeId.ROADMAP
         });
+        
+        $("#notis1").html("").removeClass("alert-info p_hack");
+        
         var infowindow = new google.maps.InfoWindow();
         var marker, i;
         for (i = 0; i < locations.length; i++) {
