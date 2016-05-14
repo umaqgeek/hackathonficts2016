@@ -55,6 +55,7 @@
                 if (d[0] == '1') {
                     $("#paparan").addClass("alert-danger p_hack").html(d[1]).delay(2000).queue(function () {
                         $(this).removeClass("alert-danger p_hack").html("");
+                        location.href = 'index.html';
                     });
                 } else if (d[0] == '-1') {
                     localStorage.setItem("username", user_no);

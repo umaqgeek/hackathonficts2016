@@ -91,6 +91,7 @@
                 if (d[0] == '1') {
                     $("#alert_paparan").addClass("alert-danger p_hack").html(d[1]).delay(2000).queue(function () {
                         $(this).removeClass("alert-danger p_hack").html("");
+                        location.href = 'register.html';
                     });
                 } else if (d[0] == '-1') {
                     $("#alert_paparan").addClass("alert-success p_hack").html(d[1]).delay(2000).queue(function () {

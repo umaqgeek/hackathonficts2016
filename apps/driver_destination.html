@@ -93,6 +93,7 @@
             if (lo_id_from == lo_id_to) {
                 $("#paparan").addClass("alert-danger p_hack").html("Cannot same destination!").delay(2000).queue(function () {
                     $(this).removeClass("alert-danger p_hack").html("");
+                    location.href = 'driver_destination.html';
                 });
                 return;
             }
@@ -106,10 +107,12 @@
                 if (d[0] == '1') {
                     $("#paparan").addClass("alert-danger p_hack").html(d[1]).delay(2000).queue(function () {
                         $(this).removeClass("alert-danger p_hack").html("");
+                        location.href = 'driver_destination.html';
                     });
                 } else if (d[0] == '-1') {
                     $("#paparan").addClass("alert-success p_hack").html(d[1]).delay(2000).queue(function () {
                         $(this).removeClass("alert-success p_hack").html("");
+                        location.href = 'driver_destination.html';
                     });
                 }
                 
