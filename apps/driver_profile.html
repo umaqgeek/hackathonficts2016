@@ -36,6 +36,78 @@
             
             <h3>Profile</h3>
             
+            <table class="table table-bordered">
+                <tr>
+                    <th>Full Name</th>
+                    <th>:</th>
+                    <td>
+                        <input type="text" id="u_fullname" class="form-control" placeholder="Insert your full name." />
+                    </td>
+                </tr>
+                <tr>
+                    <th>Matric / Staff No.</th>
+                    <th>:</th>
+                    <td>
+                        <input type="text" id="u_user_no" class="form-control" placeholder="Insert your matric / staff number." readonly="" />
+                    </td>
+                </tr>
+                <tr>
+                    <th>Password</th>
+                    <th>:</th>
+                    <td>
+                        <input type="password" id="u_password" class="form-control" placeholder="Insert your password here." />
+                    </td>
+                </tr>
+            </table>
+            
+            <p class="img-rounded" id="paparan"></p>
+            
+            <button type="button" class="btn btn-success" id="btn_save">Save Profile</button>
+            
         </center>
     </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $.post(URL_SERVER + "get_profile.php", {
+            username: localStorage.getItem("username"),
+            password: localStorage.getItem("password")
+        }).done(function (data) {
+            var d = data.split("|");
+            if (d[0] == '1') {
+                alert('Cannot reach your profile! Error: ' + d[1]);
+                location.href = 'student_mainpage.html';
+            } else if (d[0] == '2') {
+                alert('Cannot reach your profile! Error: ' + d[1]);
+                location.href = 'logout.html';
+            } else if (d[0] == '-1') {
+                $("#u_fullname").val(d[1]);
+                $("#u_user_no").val(d[2]);
+                $("#u_password").val(d[3]);
+            }
+        });
+        
+        $("#btn_save").click(function () {
+            var u_fullname = $("#u_fullname").val();
+            var u_password = $("#u_password").val();
+            $.post(URL_SERVER + "save_profile.php", {
+                u_fullname: u_fullname,
+                u_password: u_password,
+                username: localStorage.getItem("username")
+            }).done(function (data) {
+                var d = data.split("|");
+                if (d[0] == '1') {
+                    $("#paparan").addClass("alert-danger p_hack").html(d[1]).delay(2000).queue(function () {
+                        $(this).removeClass("alert-danger p_hack").html("");
+                    });
+                } else if (d[0] == '-1') {
+                    $("#paparan").addClass("alert-success p_hack").html(d[1]).delay(2000).queue(function () {
+                        $(this).removeClass("alert-success p_hack").html("");
+                        location.href = 'logout.html';
+                    });
+                }
+            });
+        });
+    });
+</script>

@@ -48,10 +48,13 @@ $d = mysql_fetch_array($r);
             echo ($t2 > 0) ? ($d2['lo_name']) : ("<Unknown>");
             ?></td>
             <td>
+                <?=$d['as_desc']; ?>
+            </td>
+<!--            <td>
                 <button type="button" class="btn btn-link btn_status" t="<?=$d['u_id']; ?>">
                     <?=$d['as_desc']; ?>
                 </button>
-            </td>
+            </td>-->
         </tr>
         <?php 
             } while ($d = mysql_fetch_array($r));     
@@ -61,14 +64,14 @@ $d = mysql_fetch_array($r);
 
 <script>
     $(document).ready(function () {
-        $(".btn_status").click(function () {
-            var t = $(this).attr("t");
-            
-            
-            $.post(URL_SERVER + "student_ajax_papar_peta.php", {
-            }).done(function (data) {
-                $("#papar_peta1").html(data);
-            });
-        });
+//        $(".btn_status").click(function () {
+//            var t = $(this).attr("t");
+//            
+//            
+//            $.post(URL_SERVER + "student_ajax_papar_peta.php", {
+//            }).done(function (data) {
+//                $("#papar_peta1").html(data);
+//            });
+//        });
     });
 </script>
